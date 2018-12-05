@@ -140,7 +140,6 @@ class Article implements Index
     }
 
     /**
-     * 批量设置属性
      * @param array $data
      */
     public function setAddDocumentBulk(array $data)

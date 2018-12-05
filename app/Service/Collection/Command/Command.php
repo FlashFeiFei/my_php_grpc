@@ -56,6 +56,6 @@ abstract class Command
      */
     public function addDocumentBulk(Index $index)
     {
-        return $this->client->index($index->getAddDocumentBulk());
+        return $this->client->bulk($index->getAddDocumentBulk());
     }
 }
