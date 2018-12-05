@@ -15,6 +15,6 @@ class CollectionController  extends Controller
 {
     public function collection()
     {
-        (new ArticleService())->createIndex();
+//        $response = (new ArticleService())->createIndex();
     }
 }

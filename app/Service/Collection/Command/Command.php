@@ -38,4 +38,29 @@ abstract class Command
         $response = $this->client->indices()->create($index->getIndexMappingsAndSettings());
         return $response;
     }
+
+    /**
+     * 添加一个文档
+     * @param Index $index
+     * @return array
+     */
+    public function addDocument(Index $index)
+    {
+        return $this->client->index($index->getAddDocument());
+    }
+
+    public function addDocumentById(Index $index)
+    {
+        return $this->client->index($index->getAddDocumentBulk());
+    }
+
+    /**
+     * 批量添加索引
+     * @param Index $index
+     * @return array
+     */
+    public function addDocumentBulk(Index $index)
+    {
+        return $this->client->index($index->getAddDocumentBulk());
+    }
 }
