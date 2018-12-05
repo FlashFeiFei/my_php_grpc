@@ -44,12 +44,12 @@ class Article implements Index
     private $attributeBulk;
 
     /**
-     * 设置数据
+     * 设置文档
      * @param array $data
      * @param null $id
      * @throws \Exception
      */
-    public function setArribute(array $data, $id = null)
+    public function setAddDocument(array $data, $id = null)
     {
         //重新初始化一下,以免下次调用带了上次的数据
         $this->attribute = [];
@@ -67,8 +67,9 @@ class Article implements Index
     /**
      * 批量设置属性
      * @param array $data
+     * @return array
      */
-    public function setArributeBulk(array $data)
+    public function setAddDocumentBulk(array $data)
     {
         //重新初始化一下,以免下次调用带了上次的数据
         $this->attributeBulk = [];
@@ -94,6 +95,8 @@ class Article implements Index
                 self::SEO_DESCRIPTION_ATT => empty($value[self::SEO_DESCRIPTION_ATT]) ? '' : $value[self::SEO_DESCRIPTION_ATT]
             ];
         }
+
+        return $this->attributeBulk;
     }
 
     /**
