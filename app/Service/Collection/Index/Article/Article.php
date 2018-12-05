@@ -67,7 +67,6 @@ class Article implements Index
     /**
      * 批量设置属性
      * @param array $data
-     * @return array
      */
     public function setAddDocumentBulk(array $data)
     {
@@ -95,8 +94,6 @@ class Article implements Index
                 self::SEO_DESCRIPTION_ATT => empty($value[self::SEO_DESCRIPTION_ATT]) ? '' : $value[self::SEO_DESCRIPTION_ATT]
             ];
         }
-
-        return $this->attributeBulk;
     }
 
     /**

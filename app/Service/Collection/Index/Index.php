@@ -26,7 +26,6 @@ interface Index
      * 设置插入单条数据
      * @param array $data
      * @param null $id
-     * @return array
      */
     public function setAddDocument(array $data, $id = null);
 
@@ -39,7 +38,6 @@ interface Index
     /**
      * 设置添加批量的数据
      * @param array $data
-     * @return array
      */
     public function setAddDocumentBulk(array $data);
 

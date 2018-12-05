@@ -49,11 +49,6 @@ abstract class Command
         return $this->client->index($index->getAddDocument());
     }
 
-    public function addDocumentById(Index $index)
-    {
-        return $this->client->index($index->getAddDocumentBulk());
-    }
-
     /**
      * 批量添加索引
      * @param Index $index
