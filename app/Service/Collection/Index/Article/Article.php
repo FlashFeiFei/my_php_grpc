@@ -44,6 +44,36 @@ class Article implements Index
     private $attributeBulk;
 
     /**
+     * 构建一个添加文档的格式对象
+     * @param $title
+     * @param $content
+     * @param $thumbnail
+     * @param $source
+     * @param $source_url
+     * @param $category
+     * @param $abstract
+     * @param $seo_title
+     * @param $seo_keywords
+     * @param $seo_description
+     * @return array
+     */
+    static public function buildDocument($title, $content, $thumbnail, $source, $source_url, $category, $abstract, $seo_title, $seo_keywords, $seo_description)
+    {
+        return [
+            Article::TITLE_ATT => $title,
+            Article::CONTENT_ATT => $content,
+            Article::THUMBNAIL_ATT => $thumbnail,
+            Article::SOURCE_ATT => $source,
+            Article::SOURCE_URL_ATT => $source_url,
+            Article::CATEGORY_ATT => $category,
+            Article::ABSTRACT_ATT => $abstract,
+            Article::SEO_TITLE_ATT => $seo_title,
+            Article::SEO_KEYWORDS_ATT => $seo_keywords,
+            Article::SEO_DESCRIPTION_ATT => $seo_description
+        ];
+    }
+
+    /**
      * 设置文档
      * @param array $data
      * @param null $id
@@ -66,7 +96,7 @@ class Article implements Index
         if (array_key_exists('id', $data)) {
             $this->attribute['id'] = $data['id'];
         }
-        
+
         $this->attribute['body'] = $data;
     }
 

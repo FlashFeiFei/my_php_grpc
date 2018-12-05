@@ -19,6 +19,15 @@ class ArticleService
     }
 
     /**
+     * 创建一个用于添加文档的对象
+     * @return array
+     */
+    static public function buildDocument($title, $content, $thumbnail, $source, $source_url, $category, $abstract, $seo_title, $seo_keywords, $seo_description)
+    {
+        return Article::buildDocument($title, $content, $thumbnail, $source, $source_url, $category, $abstract, $seo_title, $seo_keywords, $seo_description);
+    }
+
+    /**
      * 添加一个文档
      * @param array $data
      * @param null $id
