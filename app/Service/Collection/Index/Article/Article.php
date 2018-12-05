@@ -14,38 +14,65 @@ class Article implements Index
         $index = [
             'index' => self::INDEX,
             'body' => [
+                'settings' => [
+                    'analysis' => [
+                        'analyzer' => [
+                            //自定义中文分词器
+                            'my_article_ch' => [
+                                'type' => 'custom',
+                                'tokenizer' => 'ik_max_word'
+                            ]
+                        ]
+                    ]
+                ],
                 'mappings' => [
                     self::TYPE => [
                         'properties' => [
                             'title' => [
-                                'type' => 'text'
+                                'type' => 'text',
+                                'analyzer' => 'my_article_ch',
+                                'search_analyzer' => 'my_article_ch'
                             ],
                             'content' => [
-                                'type' => 'text'
+                                'type' => 'text',
+                                'analyzer' => 'my_article_ch',
+                                'search_analyzer' => 'my_article_ch'
                             ],
                             'thumbnail' => [
                                 'type' => 'text'
                             ],
                             'source' => [
-                                'type' => 'text'
+                                'type' => 'text',
+                                'analyzer' => 'my_article_ch',
+                                'search_analyzer' => 'my_article_ch'
                             ],
                             'source_url' => [
                                 'type' => 'text'
                             ],
                             'category' => [
-                                'type' => 'text'
+                                'type' => 'text',
+                                'analyzer' => 'my_article_ch',
+                                'search_analyzer' => 'my_article_ch'
                             ],
                             'abstract' => [
-                                'type' => 'text'
+                                'type' => 'text',
+                                'analyzer' => 'my_article_ch',
+                                'search_analyzer' => 'my_article_ch'
                             ],
                             'seo_title' => [
-                                'type' => 'text'
+                                'type' => 'text',
+                                'analyzer' => 'my_article_ch',
+                                'search_analyzer' => 'my_article_ch'
                             ],
                             'seo_keywords' => [
-                                'type' => 'text'
+                                'type' => 'text',
+                                'analyzer' => 'my_article_ch',
+                                'search_analyzer' => 'my_article_ch'
                             ],
                             'seo_description' => [
-                                'type' => 'text'
+                                'type' => 'text',
+                                'analyzer' => 'my_article_ch',
+                                'search_analyzer' => 'my_article_ch'
                             ],
                         ]
                     ]
