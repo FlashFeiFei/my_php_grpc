@@ -15,6 +15,13 @@ class CollectionController  extends Controller
 {
     public function collection()
     {
+        //创建索引
 //        $response = (new ArticleService())->createIndex();
+//        dd($response);
+        //添加一个文档
+        $response = (new ArticleService())->addDocument([
+
+        ]);
+        dd($response);
     }
 }

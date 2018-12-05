@@ -55,12 +55,18 @@ class Article implements Index
         $this->attribute = [];
         $this->attribute['index'] = self::INDEX;
         $this->attribute['type'] = self::TYPE;
-        if (!empty($id)) {
-            $this->attribute['id'] = $id;
-        }
         if (count($data) != count($data, 1)) {
             throw new \Exception('必须是一维数组');
         }
+        //是否有自定义的id
+        if (!empty($id)) {
+            $this->attribute['id'] = $id;
+        }
+        //获取data数据里面的id字段
+        if (array_key_exists('id', $data)) {
+            $this->attribute['id'] = $data['id'];
+        }
+        
         $this->attribute['body'] = $data;
     }
 
