@@ -10,6 +10,11 @@ class Article implements Index
     const INDEX = 'collection';
     const TYPE = 'article';
 
+    /**
+     * 主键标识，用于添加自定义id索引时，获取id数据的标识
+     */
+    const PRIMARY_KEY = self::INDEX . '.' . self::TYPE . 'primary.key';
+
     //属性
     //标题
     const TITLE_ATT = 'title';
@@ -74,6 +79,39 @@ class Article implements Index
     }
 
     /**
+     * 构建自定义的id的
+     * @param $id
+     * @param $title
+     * @param $content
+     * @param $thumbnail
+     * @param $source
+     * @param $source_url
+     * @param $category
+     * @param $abstract
+     * @param $seo_title
+     * @param $seo_keywords
+     * @param $seo_description
+     * @return array
+     */
+    static public function buildDocumentByid($id, $title, $content, $thumbnail, $source, $source_url, $category, $abstract, $seo_title, $seo_keywords, $seo_description)
+    {
+        return [
+            //用于获取id的标识
+            Article::PRIMARY_KEY => $id,
+            Article::TITLE_ATT => $title,
+            Article::CONTENT_ATT => $content,
+            Article::THUMBNAIL_ATT => $thumbnail,
+            Article::SOURCE_ATT => $source,
+            Article::SOURCE_URL_ATT => $source_url,
+            Article::CATEGORY_ATT => $category,
+            Article::ABSTRACT_ATT => $abstract,
+            Article::SEO_TITLE_ATT => $seo_title,
+            Article::SEO_KEYWORDS_ATT => $seo_keywords,
+            Article::SEO_DESCRIPTION_ATT => $seo_description
+        ];
+    }
+
+    /**
      * 设置文档
      * @param array $data
      * @param null $id
@@ -92,9 +130,10 @@ class Article implements Index
         if (!empty($id)) {
             $this->attribute['id'] = $id;
         }
-        //获取data数据里面的id字段
-        if (array_key_exists('id', $data)) {
-            $this->attribute['id'] = $data['id'];
+        //是否自定义主键
+        if (array_key_exists(Article::PRIMARY_KEY, $data)) {
+            //自定义主键
+            $this->attribute['id'] = Article::PRIMARY_KEY;
         }
 
         $this->attribute['body'] = $data;
@@ -110,13 +149,25 @@ class Article implements Index
         $this->attributeBulk = [];
 
         foreach ($data as $key => $value) {
-            $this->attributeBulk['body'][] = [
-                'index' => [
-                    '_index' => self::INDEX,
-                    '_type' => self::TYPE,
-                    '_id' => empty($value['id']) ? time() : $value['id']
-                ]
-            ];
+            //是否自定义主键
+            if (array_key_exists(Article::PRIMARY_KEY, $value)) {
+                //自定义主键
+                $this->attributeBulk['body'][] = [
+                    'index' => [
+                        '_index' => self::INDEX,
+                        '_type' => self::TYPE,
+                        '_id' => $value[Article::PRIMARY_KEY]
+                    ]
+                ];
+            } else {
+                //非自定义主键
+                $this->attributeBulk['body'][] = [
+                    'index' => [
+                        '_index' => self::INDEX,
+                        '_type' => self::TYPE
+                    ]
+                ];
+            }
             $this->attributeBulk['body'][] = [
                 self::TITLE_ATT => empty($value[self::TITLE_ATT]) ? '' : $value[self::TITLE_ATT],
                 self::CONTENT_ATT => empty($value[self::CONTENT_ATT]) ? '' : $value[self::CONTENT_ATT],

@@ -15,7 +15,7 @@ class CollectionController extends Controller
 {
     public function collection()
     {
-        
+
         $this->addDocument();
     }
 
