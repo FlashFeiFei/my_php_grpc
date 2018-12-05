@@ -9,11 +9,12 @@
 namespace App\Http\Controllers\Collection;
 
 use App\Http\Controllers\Controller;
+use App\Service\Collection\Article\ArticleService;
 
 class CollectionController  extends Controller
 {
     public function collection()
     {
-        echo 'Hello word';
+        (new ArticleService())->createIndex();
     }
 }
