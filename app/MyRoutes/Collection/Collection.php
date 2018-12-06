@@ -17,7 +17,7 @@ class Collection implements RouteInterface
     public function map(Router $router)
     {
         $router->group(['namespace' => 'Collection'], function () use ($router) {
-            $router->get('/collection', 'CollectionController@collection');
+            $router->get('/addDocument', 'CollectionController@addDocument');
         });
     }
 }
