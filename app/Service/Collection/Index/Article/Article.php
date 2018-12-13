@@ -217,6 +217,7 @@ class Article implements Index
             'body' => [
                 'settings' => [
                     'analysis' => [
+                        //定义分词
                         'analyzer' => [
                             //自定义中文分词器
                             'my_article_ch' => [
